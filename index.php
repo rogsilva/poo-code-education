@@ -176,7 +176,7 @@ foreach($clientes as $key => $cliente){
                     <p><strong>Nome: </strong> <?php echo $clientes[$_GET['id']]->getNome();?></p>
                     <p><strong>Razão Social: </strong> <?php echo $clientes[$_GET['id']]->getRazao();?></p>
                     <p><strong>CNPJ: </strong> <?php echo $clientes[$_GET['id']]->getCnpj();?></p>
-                    <p><strong>CNPJ: </strong> <?php echo $clientes[$_GET['id']]->getIe();?></p>
+                    <p><strong>Inscrição Estadual: </strong> <?php echo $clientes[$_GET['id']]->getIe();?></p>
                     <p><strong>Telefone: </strong> <?php echo $clientes[$_GET['id']]->getTelefone();?></p>
                     <?php
                     $estrelas = "";
