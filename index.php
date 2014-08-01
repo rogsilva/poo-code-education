@@ -1,18 +1,25 @@
 <?php
-include_once 'classes/Cliente.php';
+include_once 'classes/PessoaFisica.php';
+include_once 'classes/PessoaJuridica.php';
+include_once 'classes/Endereco.php';
 
-$clientes = array(
-    new Cliente('Cliente 01', '01.010.101/0001-01', '1111-1111', 'Rua 01'),
-    new Cliente('Cliente 02', '02.020.202/0001-02', '2222-2222', 'Rua 02'),
-    new Cliente('Cliente 03', '03.030.303/0001-03', '3333-3333', 'Rua 03'),
-    new Cliente('Cliente 04', '04.040.404/0001-04', '4444-4444', 'Rua 04'),
-    new Cliente('Cliente 05', '05.050.505/0001-05', '5555-5555', 'Rua 05'),
-    new Cliente('Cliente 06', '06.060.606/0001-06', '6666-6666', 'Rua 06'),
-    new Cliente('Cliente 07', '07.070.707/0001-07', '7777-7777', 'Rua 07'),
-    new Cliente('Cliente 08', '08.080.808/0001-08', '8888-8888', 'Rua 08'),
-    new Cliente('Cliente 09', '09.090.909/0001-09', '9999-9999', 'Rua 09'),
-    new Cliente('Cliente 10', '10.101.010/0001-10', '1010-1010', 'Rua 10')
-);
+
+$cliente1 = new PessoaFisica("333.333.333-12", "José Silva", "011 4444-5555", 3);
+$cliente1->setEnderecos(new Endereco("Rua Benedito Barbosa", 1200, "São Bernardo do Campo", "SP", "33333-333"))
+        ->setEnderecos(new Endereco("Rua Benedito Barbosa", 1252, "São Bernardo do Campo", "SP", "33333-333"));
+
+$cliente2 = new PessoaFisica("444.333.444-12", "Paulo Ferraz", "011 99999-4444", 4);
+$cliente2->setEnderecos(new Endereco("Avenida Pereira Barreto", 1395, "Santo André", "SP", "45455-222"));
+
+$cliente3 = new PessoaJuridica("33.555.555/0001-01", "111.222.333.444", "Empresa 1 Ltda", "Empresa 1", "011 5555-5555", 2);
+$cliente3->setEnderecos(new Endereco("Avenida Paulista", 1100, "São Paulo", "SP", "45455-222"));
+
+$cliente4 = new PessoaJuridica("33.444.777/0001-01", "555.222.888.444", "Empresa 2 S/A", "Empresa 2", "011 7777-5555", 5);
+$cliente4->setEnderecos(new Endereco("Rua Augusta", 800, "São Paulo", "SP", "78787-354"))
+        ->setEnderecos(new Endereco("Avenida Paulista", 1200, "São Paulo", "SP", "78787-458"));
+
+
+$clientes = array($cliente1, $cliente2, $cliente3, $cliente4);
 
 if(isset($_GET['order']) && $_GET['order'] == 'desc'){
     krsort($clientes);
@@ -20,11 +27,17 @@ if(isset($_GET['order']) && $_GET['order'] == 'desc'){
 
 $listaClientes = '';
 foreach($clientes as $key => $cliente){
+    $estrelas = "";
+    for($i = 0; $i < $cliente->getEstrelas(); $i++){
+        $estrelas.="<i class=\"glyphicon glyphicon-star\"></i>";
+    }
     $listaClientes.="
                         <tr>
                             <td>$key</td>
                             <td>".$cliente->getNome()."</td>
                             <td>".$cliente->getTelefone()."</td>
+                            <td>$estrelas</td>
+                            <td>".$cliente->getTipo()."</td>
                         </tr>
                     ";
 }
@@ -102,6 +115,8 @@ foreach($clientes as $key => $cliente){
                         </th>
                         <th>Nome</th>
                         <th>Telefone</th>
+                        <th>Qualificação</th>
+                        <th>Tipo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -134,10 +149,53 @@ foreach($clientes as $key => $cliente){
                 <h4 class="modal-title" id="myModalLabel"><?php echo $clientes[$_GET['id']]->getNome();?></h4>
             </div>
             <div class="modal-body">
-                <p><strong>Nome: </strong> <?php echo $clientes[$_GET['id']]->getNome();?></p>
-                <p><strong>CNPJ: </strong> <?php echo $clientes[$_GET['id']]->getCnpj();?></p>
-                <p><strong>Telefone: </strong> <?php echo $clientes[$_GET['id']]->getTelefone();?></p>
-                <p><strong>Endereço: </strong> <?php echo $clientes[$_GET['id']]->getEndereco();?></p>
+                <?php if ($clientes[$_GET['id']]->getTipo() == "Pessoa Física"){?>
+                    <p><strong>Tipo: </strong> <?php echo $clientes[$_GET['id']]->getTipo();?></p>
+                    <p><strong>Nome: </strong> <?php echo $clientes[$_GET['id']]->getNome();?></p>
+                    <p><strong>CPF: </strong> <?php echo $clientes[$_GET['id']]->getCpf();?></p>
+                    <p><strong>Telefone: </strong> <?php echo $clientes[$_GET['id']]->getTelefone();?></p>
+                    <?php
+                        $estrelas = "";
+                        for($i = 0; $i < $clientes[$_GET['id']]->getEstrelas(); $i++){
+                            $estrelas.="<i class=\"glyphicon glyphicon-star\"></i>";
+                        }
+                    ?>
+                    <p><strong>Qualificação: </strong> <?php echo $estrelas;?></p>
+                    <p><strong>Endereço(s):</strong></p>
+                    <?php
+                        $enderecos = "";
+                        foreach($clientes[$_GET['id']]->getEnderecos() as $endereco){
+                            $enderecos.="<p>".$endereco->getLogradouro(). ", " . $endereco->getNumero(). ", " . $endereco->getCidade(). " - " . $endereco->getEstado() ."</p>";
+                        }
+
+                        echo $enderecos;
+                    ?>
+                <?php }else{?>
+
+                    <p><strong>Tipo: </strong> <?php echo $clientes[$_GET['id']]->getTipo();?></p>
+                    <p><strong>Nome: </strong> <?php echo $clientes[$_GET['id']]->getNome();?></p>
+                    <p><strong>Razão Social: </strong> <?php echo $clientes[$_GET['id']]->getRazao();?></p>
+                    <p><strong>CNPJ: </strong> <?php echo $clientes[$_GET['id']]->getCnpj();?></p>
+                    <p><strong>CNPJ: </strong> <?php echo $clientes[$_GET['id']]->getIe();?></p>
+                    <p><strong>Telefone: </strong> <?php echo $clientes[$_GET['id']]->getTelefone();?></p>
+                    <?php
+                    $estrelas = "";
+                    for($i = 0; $i < $clientes[$_GET['id']]->getEstrelas(); $i++){
+                        $estrelas.="<i class=\"glyphicon glyphicon-star\"></i>";
+                    }
+                    ?>
+                    <p><strong>Qualificação: </strong> <?php echo $estrelas;?></p>
+                    <p><strong>Endereço(s):</strong></p>
+                    <?php
+                    $enderecos = "";
+                    foreach($clientes[$_GET['id']]->getEnderecos() as $endereco){
+                        $enderecos.="<p>".$endereco->getLogradouro(). ", " . $endereco->getNumero(). ", " . $endereco->getCidade(). " - " . $endereco->getEstado() ."</p>";
+                    }
+
+                    echo $enderecos;
+                    ?>
+
+                <?php }?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

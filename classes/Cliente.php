@@ -1,45 +1,38 @@
 <?php
+require_once 'ClienteInterface.php';
 
+class Cliente implements ClienteInterface {
 
-class Cliente {
+    protected $nome;
+    protected $telefone;
+    protected $enderecos;
+    protected $estrelas;
+    protected $tipo;
 
-    private $nome;
-    private $cnpj;
-    private $telefone;
-    private $endereco;
+    public function __construct($nome, $telefone, $estrelas, $tipo){
 
-    public function __construct($nome, $cnpj, $telefone, $endereco){
-
-        $this->nome = $nome;
-        $this->cnpj = $cnpj;
-        $this->telefone = $telefone;
-        $this->endereco = $endereco;
+        $this->setNome($nome)
+             ->setTelefone($telefone)
+             ->setEstrelas($estrelas)
+             ->setTipo($tipo);
 
     }
 
-    public function setCnpj($cnpj)
+    public function setEnderecos(Endereco $enderecos)
     {
-        $this->cnpj = $cnpj;
+        $this->enderecos[] = $enderecos;
+        return $this;
     }
 
-    public function getCnpj()
+    public function getEnderecos()
     {
-        return $this->cnpj;
-    }
-
-    public function setEndereco($endereco)
-    {
-        $this->endereco = $endereco;
-    }
-
-    public function getEndereco()
-    {
-        return $this->endereco;
+        return $this->enderecos;
     }
 
     public function setNome($nome)
     {
         $this->nome = $nome;
+        return $this;
     }
 
     public function getNome()
@@ -50,11 +43,35 @@ class Cliente {
     public function setTelefone($telefone)
     {
         $this->telefone = $telefone;
+        return $this;
     }
 
     public function getTelefone()
     {
         return $this->telefone;
+        return $this;
+    }
+
+    public function setEstrelas($estrelas)
+    {
+        $this->estrelas = $estrelas;
+        return $this;
+    }
+
+    public function getEstrelas()
+    {
+        return $this->estrelas;
+    }
+
+    public function setTipo($tipo)
+    {
+        $this->tipo = $tipo;
+        return $this;
+    }
+
+    public function getTipo()
+    {
+        return $this->tipo;
     }
 
 
