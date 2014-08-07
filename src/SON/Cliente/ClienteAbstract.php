@@ -1,7 +1,11 @@
 <?php
-require_once 'ClienteInterface.php';
 
-class Cliente implements ClienteInterface {
+namespace SON\Cliente;
+
+use SON\Cliente\Interfaces\ClienteInterface;
+
+
+abstract class ClienteAbstract implements ClienteInterface {
 
     protected $nome;
     protected $telefone;

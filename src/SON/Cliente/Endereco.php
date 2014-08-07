@@ -1,5 +1,7 @@
 <?php
 
+namespace SON\Cliente;
+
 class Endereco {
 
         private $logradouro;

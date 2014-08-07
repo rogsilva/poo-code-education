@@ -1,7 +1,10 @@
 <?php
-require_once 'Cliente.php';
 
-class PessoaFisica extends Cliente {
+namespace SON\Cliente\Types;
+
+use SON\Cliente\ClienteAbstract;
+
+class PessoaFisica extends ClienteAbstract {
 
         private $cpf;
 

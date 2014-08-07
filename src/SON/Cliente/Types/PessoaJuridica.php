@@ -1,7 +1,9 @@
 <?php
-require_once 'Cliente.php';
+namespace SON\Cliente\Types;
 
-class PessoaJuridica extends Cliente {
+use SON\Cliente\ClienteAbstract;
+
+class PessoaJuridica extends ClienteAbstract {
 
         private $cnpj;
         private $ie;

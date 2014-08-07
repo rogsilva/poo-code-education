@@ -1,5 +1,6 @@
 <?php
 
+namespace SON\Cliente\Interfaces;
 
 interface ClienteInterface {
 
