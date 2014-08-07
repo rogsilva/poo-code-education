@@ -1,20 +1,20 @@
 <?php
-require_once "autoload.php";
+require_once "../autoload.php";
 
 
 $cliente1 = new \SON\Cliente\Types\PessoaFisica("333.333.333-12", "José Silva", "011 4444-5555", 3);
-$cliente1->setEnderecos(new Endereco("Rua Benedito Barbosa", 1200, "São Bernardo do Campo", "SP", "33333-333"))
-        ->setEnderecos(new Endereco("Rua Benedito Barbosa", 1252, "São Bernardo do Campo", "SP", "33333-333"));
+$cliente1->setEnderecos(new \SON\Cliente\Endereco("Rua Benedito Barbosa", 1200, "São Bernardo do Campo", "SP", "33333-333"))
+        ->setEnderecos(new \SON\Cliente\Endereco("Rua Benedito Barbosa", 1252, "São Bernardo do Campo", "SP", "33333-333"));
 
-$cliente2 = new PessoaFisica("444.333.444-12", "Paulo Ferraz", "011 99999-4444", 4);
-$cliente2->setEnderecos(new Endereco("Avenida Pereira Barreto", 1395, "Santo André", "SP", "45455-222"));
+$cliente2 = new \SON\Cliente\Types\PessoaFisica("444.333.444-12", "Paulo Ferraz", "011 99999-4444", 4);
+$cliente2->setEnderecos(new \SON\Cliente\Endereco("Avenida Pereira Barreto", 1395, "Santo André", "SP", "45455-222"));
 
-$cliente3 = new PessoaJuridica("33.555.555/0001-01", "111.222.333.444", "Empresa 1 Ltda", "Empresa 1", "011 5555-5555", 2);
-$cliente3->setEnderecos(new Endereco("Avenida Paulista", 1100, "São Paulo", "SP", "45455-222"));
+$cliente3 = new \SON\Cliente\Types\PessoaJuridica("33.555.555/0001-01", "111.222.333.444", "Empresa 1 Ltda", "Empresa 1", "011 5555-5555", 2);
+$cliente3->setEnderecos(new \SON\Cliente\Endereco("Avenida Paulista", 1100, "São Paulo", "SP", "45455-222"));
 
-$cliente4 = new PessoaJuridica("33.444.777/0001-01", "555.222.888.444", "Empresa 2 S/A", "Empresa 2", "011 7777-5555", 5);
-$cliente4->setEnderecos(new Endereco("Rua Augusta", 800, "São Paulo", "SP", "78787-354"))
-        ->setEnderecos(new Endereco("Avenida Paulista", 1200, "São Paulo", "SP", "78787-458"));
+$cliente4 = new \SON\Cliente\Types\PessoaJuridica("33.444.777/0001-01", "555.222.888.444", "Empresa 2 S/A", "Empresa 2", "011 7777-5555", 5);
+$cliente4->setEnderecos(new \SON\Cliente\Endereco("Rua Augusta", 800, "São Paulo", "SP", "78787-354"))
+        ->setEnderecos(new \SON\Cliente\Endereco("Avenida Paulista", 1200, "São Paulo", "SP", "78787-458"));
 
 
 $clientes = array($cliente1, $cliente2, $cliente3, $cliente4);
