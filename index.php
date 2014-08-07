@@ -1,10 +1,8 @@
 <?php
-include_once 'classes/PessoaFisica.php';
-include_once 'classes/PessoaJuridica.php';
-include_once 'classes/Endereco.php';
+require_once "autoload.php";
 
 
-$cliente1 = new PessoaFisica("333.333.333-12", "José Silva", "011 4444-5555", 3);
+$cliente1 = new \SON\Cliente\Types\PessoaFisica("333.333.333-12", "José Silva", "011 4444-5555", 3);
 $cliente1->setEnderecos(new Endereco("Rua Benedito Barbosa", 1200, "São Bernardo do Campo", "SP", "33333-333"))
         ->setEnderecos(new Endereco("Rua Benedito Barbosa", 1252, "São Bernardo do Campo", "SP", "33333-333"));
 
