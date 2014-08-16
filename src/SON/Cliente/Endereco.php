@@ -4,6 +4,8 @@ namespace SON\Cliente;
 
 class Endereco {
 
+        private $id;
+        private $clientes_id;
         private $logradouro;
         private $numero;
         private $cidade;
@@ -19,6 +21,39 @@ class Endereco {
                     ->setEstado($estado)
                     ->setCep($cep);
         }
+
+        /**
+         * @param mixed $clientes_id
+         */
+        public function setClientesId($clientes_id)
+        {
+            $this->clientes_id = $clientes_id;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getClientesId()
+        {
+            return $this->clientes_id;
+        }
+
+        /**
+         * @param mixed $id
+         */
+        public function setId($id)
+        {
+            $this->id = $id;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+
         /**
          * @param mixed $cep
          */

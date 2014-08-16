@@ -7,6 +7,7 @@ use SON\Cliente\Interfaces\ClienteInterface;
 
 abstract class ClienteAbstract implements ClienteInterface {
 
+    protected $id;
     protected $nome;
     protected $telefone;
     protected $enderecos;
@@ -31,6 +32,16 @@ abstract class ClienteAbstract implements ClienteInterface {
     public function getEnderecos()
     {
         return $this->enderecos;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function setNome($nome)
@@ -77,6 +88,5 @@ abstract class ClienteAbstract implements ClienteInterface {
     {
         return $this->tipo;
     }
-
 
 } 
